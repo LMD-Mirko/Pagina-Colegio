@@ -142,7 +142,11 @@
                 </div>
                 <div class="form-grupo">
                     <label for="idioma">Idioma:</label>
-                    <input type="text" id="idioma" name="idioma" required>
+                    <select id="idioma" name="idioma" required>
+                        <option value="español">Español</option>
+                        <option value="inglés">Inglés</option>
+                        <option value="francés">Francés</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-modal btn-cancelar" onclick="cerrarModal('modalEstudiante')">Cancelar</button>
@@ -151,11 +155,6 @@
             </form>
         </div>
     </div>
-    <style>
-
-        
-    </style>
-
     <!-- modal eliminar -->
     <div id="modalEliminar" class="modal">
         <div class="modal-contenido">
@@ -172,5 +171,6 @@
         <p>2025 Todos los derechos reservados por Chancones XD.</p>
     </footer>
     <script src="js/registro.js"></script>
+
 </body>
 </html>

@@ -12,14 +12,22 @@ function abrirModalAgregar() {
 function abrirModalEditar(id, nombres, correo, celular, idioma) {
     document.getElementById('tituloModal').textContent = 'Editar Estudiante';
     
+    // llamar los valores 
     document.getElementById('idEstudiante').value = id;
     document.getElementById('nombres').value = nombres;
     document.getElementById('correo').value = correo;
     document.getElementById('celular').value = celular;
-    document.getElementById('idioma').value = idioma;
     
-    const modal = document.getElementById('modalEstudiante');
-    modal.style.display = 'flex';
+    // establecer elidioma
+    const select = document.getElementById('idioma');
+    Array.from(select.options).some((option, index) => {
+        if (option.text.toLowerCase() === idioma.toLowerCase()) {
+            select.selectedIndex = index;
+            return true;
+        }
+    });
+    // Mostrar el modal
+    document.getElementById('modalEstudiante').style.display = 'flex';
 }
 
 function abrirModalEliminar(id) {

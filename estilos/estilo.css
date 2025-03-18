@@ -135,6 +135,14 @@ body {
     width: 100%;
 }
 
+.form-grupo select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    padding: 10px;
+    width: 100%;
+}
 .form-grupo label {
     color: #320e86;
     display: block;
