@@ -1,0 +1,296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    transition: all 0.2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #dbd9eb;
+    color: #200e31;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.6;
+}
+
+.acciones {
+    margin-bottom: 20px;
+}
+
+.aviso {
+    font-size: 1.6rem; 
+    margin-bottom: 20px;
+}
+
+.btn-accion {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 1.4rem;
+    margin-right: 5px;
+    padding: 6px 10px;
+}
+
+.btn-agregar {
+    background-color: #fc8c05;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #e07a00;
+}
+
+.btn-cancelar {
+    background-color: #95a5a6;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.btn-confirmar {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-editar {
+    background-color: #011aff;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color: #0012c7;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b;
+}
+
+.btn-guardar {
+    background-color: #fc8c05;
+    color: #fff;
+}
+
+.btn-modal {
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 1.6rem;
+    padding: 10px 20px;
+}
+
+.cerrar {
+    color: #aaa;
+    cursor: pointer;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.cerrar:hover {
+    color: #0e2431;
+}
+
+.contenedor {
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 100px auto 0;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.form-grupo {
+    margin-bottom: 15px;
+}
+
+.form-grupo input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-grupo label {
+    color: #320e86;
+    display: block;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.logo {
+    color: #fc8c05;
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.logo:hover {
+    color: #320e86;
+}
+
+.menu-icono {
+    color: #320e86;
+    cursor: pointer;
+    display: none !important;
+    font-size: 3rem;
+}
+
+.modal {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+}
+
+.modal-contenido {
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 450px;
+    padding: 20px;
+    position: relative;
+    width: 50%;
+}
+
+.nav {
+    align-items: center;
+    background-color: #fcfcfc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: 6.5rem;
+    justify-content: space-between;
+    left: 0;
+    padding: 1.7rem 10%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.navegacion li {
+    margin-left: 2.5rem;
+}
+
+.navegacion ul {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.navegacion ul li a {
+    color: #0e2431;
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.04rem;
+    padding: 0.7rem 0;
+    position: relative;
+    text-decoration: none;
+}
+
+.navegacion ul li a::after {
+    background: #011aff;
+    bottom: 0;
+    content: '';
+    height: 0.2rem;
+    left: 0;
+    position: absolute;
+    transition: width 0.3s ease;
+    width: 0;
+}
+
+.navegacion ul li a:hover::after {
+    width: 100%;
+}
+
+.pie-pagina {
+    background-color: #320e86;
+    color: #fff;
+    font-size: 1.6rem;
+    margin-top: 50px;
+    padding: 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.t_modal {
+    color: #320e86;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tabla-estudiantes {
+    border-collapse: collapse;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 100%;
+}
+
+.tabla-estudiantes th, .tabla-estudiantes td {
+    border: 1px solid #ddd;
+    font-size: 1.6rem;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabla-estudiantes th {
+    background-color: #320e86;
+    color: #fff;
+}
+
+.tabla-estudiantes tr:nth-child(even) {
+    background-color: #f0f0f8;
+}
+
+.tabla-estudiantes tr:hover {
+    background-color: #e9e9e9;
+}
+
+.titulo-seccion {
+    color: #320e86;
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .modal-contenido {
+        width: 85%;
+    }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/estilo.css">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Chancones XD</title>
+</head>
+<body>
+    <header class="nav">
+        <a href="#quienes-somos" class="logo">Chancones XD</a>
+        
+        <div class="menu-icono fas fa-bars"></div>
+        
+        <nav class="navegacion">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html">Bienvenida</a></li>
+                <li><a href="datos.html">Registro</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        <h1 class="titulo-seccion">Registro De Estudiantes</h1>
+        
+        <div class="acciones">
+            <button class="btn-agregar" id="btnAgregar" onclick="abrirModalAgregar()"><i class="fas fa-plus-circle"></i> Agregar Estudiante</button>
+        </div>
+        
+        <table class="tabla-estudiantes">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombres</th>
+                    <th>Correo</th>
+                    <th>Celular</th>
+                    <th>Idioma</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Juan Pérez</td>
+                    <td>Juan@gmail.Com</td>
+                    <td>912345678</td>
+                    <td>Español</td>
+                    <td>
+                        <button class="btn-accion btn-editar" onclick="abrirModalEditar(1, 'Juan Pérez', 'Juan@gmail.Com', '912345678', 'Español')">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="abrirModalEliminar(1)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>María López</td>
+                    <td>Maria@gmail.Com</td>
+                    <td>923456789</td>
+                    <td>Inglés</td>
+                    <td>
+                        <button class="btn-accion btn-editar" onclick="abrirModalEditar(2, 'María López', 'Maria@gmail.Com', '923456789', 'Inglés')">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="abrirModalEliminar(2)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Carlos Rodríguez</td>
+                    <td>Carlos@gmail.Com</td>
+                    <td>934567890</td>
+                    <td>Francés</td>
+                    <td>
+                        <button class="btn-accion btn-editar" onclick="abrirModalEditar(3, 'Carlos Rodríguez', 'Carlos@gmail.Com', '934567890', 'Francés')">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="abrirModalEliminar(3)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Ana González</td>
+                    <td>Ana@gmail.Com</td>
+                    <td>945678901</td>
+                    <td>Inglés</td>
+                    <td>
+                        <button class="btn-accion btn-editar" onclick="abrirModalEditar(4, 'Ana González', 'Ana@gmail.Com', '945678901', 'Inglés')">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="abrirModalEliminar(4)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pedro Ramírez</td>
+                    <td>Pedro@gmail.Com</td>
+                    <td>956789012</td>
+                    <td>Español</td>
+                    <td>
+                        <button class="btn-accion btn-editar" onclick="abrirModalEditar(5, 'Pedro Ramírez', 'Pedro@gmail.Com', '956789012', 'Español')">
+                            <i class="fas fa-edit"></i> Editar
+                        </button>
+                        <button class="btn-accion btn-eliminar" onclick="abrirModalEliminar(5)">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <!-- modal agregar y editar-->
+    <div id="modalEstudiante" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar" onclick="cerrarModal('modalEstudiante')">&times;</span>
+            <h2 id="tituloModal" class="t_modal">Agregar Estudiante</h2>
+            <form id="formEstudiante">
+                <input type="hidden" id="idEstudiante" value="">
+                <div class="form-grupo">
+                    <label for="nombres">Nombres:</label>
+                    <input type="text" id="nombres" name="nombres" required>
+                </div>
+                <div class="form-grupo">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correo" name="correo" required>
+                </div>
+                <div class="form-grupo">
+                    <label for="celular">Número de Celular:</label>
+                    <input type="tel" id="celular" name="celular" required>
+                </div>
+                <div class="form-grupo">
+                    <label for="idioma">Idioma:</label>
+                    <input type="text" id="idioma" name="idioma" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-modal btn-cancelar" onclick="cerrarModal('modalEstudiante')">Cancelar</button>
+                    <button type="submit" class="btn-modal btn-guardar">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <style>
+
+        
+    </style>
+
+    <!-- modal eliminar -->
+    <div id="modalEliminar" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar" onclick="cerrarModal('modalEliminar')">&times;</span>
+            <h2 class="t_modal">Eliminar Estudiante</h2>
+            <p class="aviso">¿Estás seguro que deseas eliminar este estudiante?</p>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal btn-cancelar" onclick="cerrarModal('modalEliminar')">Cancelar</button>
+                <button type="button" class="btn-modal btn-confirmar" onclick="eliminarEstudiante()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    <footer class="pie-pagina">
+        <p>2025 Todos los derechos reservados por Chancones XD.</p>
+    </footer>
+    <script src="js/registro.js"></script>
+</body>
+</html>
