@@ -1,18 +1,36 @@
-
 let estudianteIdActual = null;
 
+
 document.addEventListener('DOMContentLoaded', function() {
-    cargarEstudiantes();
+    inicializarEstudiantes();
     inicializarMenuResponsive();
 });
 
-// carga datos de localstorage
-function cargarEstudiantes() {
-    const estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+function inicializarEstudiantes() {
     const tabla = document.querySelector('.tabla-estudiantes tbody');
-    tabla.innerHTML = ''; // Limpiar tabla antes de cargar
+    let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+
+    const filasHTML = tabla.querySelectorAll('tr');
+    const estudiantesHTML = Array.from(filasHTML).map(fila => {
+        const celdas = fila.querySelectorAll('td');
+        return {
+            id: parseInt(celdas[0].textContent),
+            nombres: celdas[1].textContent,
+            correo: celdas[2].textContent,
+            celular: celdas[3].textContent,
+            idioma: celdas[4].textContent
+        };
+    });
+
+    if (estudiantes.length === 0 && estudiantesHTML.length > 0) {
+        estudiantes = estudiantesHTML;
+        guardarEstudiantes(estudiantes);
+    }
+
+    tabla.innerHTML = '';
     estudiantes.forEach(est => agregarFilaEstudiante(est));
 }
+
 
 function guardarEstudiantes(estudiantes) {
     localStorage.setItem('estudiantes', JSON.stringify(estudiantes));
@@ -90,19 +108,19 @@ document.getElementById('formEstudiante').addEventListener('submit', function(ev
     let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
 
     if (id) {
-        // editar estudiante 
+        // Editar estudiante existente
         estudiantes = estudiantes.map(est => 
-            est.id == id ? { id, nombres, correo, celular, idioma } : est
+            est.id == id ? { id: parseInt(id), nombres, correo, celular, idioma } : est
         );
     } else {
-        // Agregar nuevo 
+        // Agregar nuevo estudiante
         const nuevoId = estudiantes.length > 0 ? Math.max(...estudiantes.map(e => e.id)) + 1 : 1;
         estudiantes.push({ id: nuevoId, nombres, correo, celular, idioma });
         agregarFilaEstudiante({ id: nuevoId, nombres, correo, celular, idioma });
     }
 
     guardarEstudiantes(estudiantes);
-    if (id) cargarEstudiantes(); 
+    if (id) inicializarEstudiantes(); // Recargar tabla si es edición
     cerrarModal('modalEstudiante');
 });
 
@@ -112,13 +130,13 @@ document.querySelector('.btn-confirmar')?.addEventListener('click', function() {
         let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
         estudiantes = estudiantes.filter(est => est.id != estudianteIdActual);
         guardarEstudiantes(estudiantes);
-        cargarEstudiantes();
+        inicializarEstudiantes();
         cerrarModal('modalEliminar');
         estudianteIdActual = null;
     }
 });
 
-// Cerrar modal al hacer clic fuera
+// Cerrar modal al precionar fuera 
 window.addEventListener('click', function(event) {
     const modalEstudiante = document.getElementById('modalEstudiante');
     const modalEliminar = document.getElementById('modalEliminar');
@@ -128,4 +146,3 @@ window.addEventListener('click', function(event) {
     if (event.target === modalEliminar) cerrarModal('modalEliminar');
     if (event.target === modalIdioma) cerrarModal('modalIdioma');
 });
-
