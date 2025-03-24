@@ -26,10 +26,14 @@ function abrirModalEditar(id, nombres, correo, celular, idioma) {
             return true;
         }
     });
-    // Mostrar el modal
     document.getElementById('modalEstudiante').style.display = 'flex';
 }
 
+// Abrir modal de agregar idioma
+function abrirModalIdioma() {
+    document.getElementById('modalIdioma').style.display = 'flex';
+    document.getElementById('nuevoIdioma').value = '';
+}
 function abrirModalEliminar(id) {
     estudianteIdActual = id;
     const modal = document.getElementById('modalEliminar');

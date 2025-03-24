@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +14,7 @@ html {
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -19,10 +22,18 @@ body {
     color: #200e31;
     font-family: "Poppins", sans-serif;
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .acciones {
     margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .aviso {
@@ -117,9 +128,15 @@ body {
     background-color: #fcfcfc;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin: 100px auto 0;
+    margin: 100px auto 20px;
     max-width: 1200px;
+    width: 90%; 
     padding: 20px;
+}
+
+.contenido-principal {
+    flex: 1;
+    width: 100%;
 }
 
 .form-grupo {
@@ -143,6 +160,7 @@ body {
     padding: 10px;
     width: 100%;
 }
+
 .form-grupo label {
     color: #320e86;
     display: block;
@@ -245,16 +263,6 @@ body {
     width: 100%;
 }
 
-.pie-pagina {
-    background-color: #320e86;
-    color: #fff;
-    font-size: 1.6rem;
-    margin-top: 50px;
-    padding: 15px 0;
-    text-align: center;
-    width: 100%;
-}
-
 .t_modal {
     color: #320e86;
     font-size: 2.2rem;
@@ -262,11 +270,18 @@ body {
     text-align: center;
 }
 
+.tabla-contenedor {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; 
+}
+
 .tabla-estudiantes {
     border-collapse: collapse;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     width: 100%;
+    table-layout: auto; 
 }
 
 .tabla-estudiantes th, .tabla-estudiantes td {
@@ -274,6 +289,7 @@ body {
     font-size: 1.6rem;
     padding: 12px;
     text-align: left;
+    white-space: nowrap;
 }
 
 .tabla-estudiantes th {
@@ -289,6 +305,10 @@ body {
     background-color: #e9e9e9;
 }
 
+.tabla-estudiantes td:last-child {
+    text-align: center;
+}
+
 .titulo-seccion {
     color: #320e86;
     font-size: 3rem;
@@ -297,8 +317,126 @@ body {
     text-align: center;
 }
 
+footer {
+    background-color: #380078;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    font-size: 1.6rem;
+    margin-top: auto;
+}
+
+/* responsive */
 @media (max-width: 768px) {
+    .menu-icono {
+        display: block !important; 
+    }
+
+    .navegacion {
+        position: absolute;
+        top: 6.5rem;
+        left: 0;
+        right: 0;
+        background: #fcfcfc;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); 
+    }
+
+    .navegacion.activo {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .navegacion ul {
+        display: block;
+        padding: 2rem;
+    }
+
+    .navegacion ul li {
+        margin: 2rem 0;
+    }
+
     .modal-contenido {
         width: 85%;
+        max-width: none; 
+    }
+    .contenedor {
+        width: 95%;
+        padding: 15px;
+        margin-top: 80px;
+    }
+    .tabla-estudiantes th, .tabla-estudiantes td {
+        padding: 8px;
+        font-size: 1.4rem;
+    }
+    .titulo-seccion {
+        font-size: 2.4rem;
+    }
+    .btn-agregar {
+        font-size: 1.4rem;
+        padding: 8px 16px;
+    }
+    .btn-accion {
+        font-size: 1.2rem;
+        padding: 5px 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 50%; 
+    }
+    .contenedor {
+        width: 100%; 
+        padding: 10px;
+        margin-top: 70px;
+    }
+    .tabla-contenedor {
+        overflow-x: auto; 
+        width: 100%;
+    }
+    .tabla-estudiantes {
+        width: 100%; 
+        min-width: 0;
+        font-size: 1.2rem; 
+    }
+    .tabla-estudiantes th, .tabla-estudiantes td {
+        padding: 6px;
+        font-size: 1.2rem;
+    }
+    .btn-agregar {
+        font-size: 1.2rem;
+        padding: 6px 12px;
+    }
+
+    .btn-accion {
+        font-size: 1rem;
+        padding: 4px 6px;
+        margin-bottom: 5px;
+    }
+    .acciones {
+        gap: 3px; 
+    }
+    .titulo-seccion {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .tabla-estudiantes th, .tabla-estudiantes td {
+        padding: 4px;
+        font-size: 1rem;
+    }
+    .btn-agregar {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+    .btn-accion {
+        font-size: 0.9rem;
+        padding: 3px 5px;
+    }
+    .modal-contenido {
+        width: 90%;
+        padding: 15px;
     }
 }
