@@ -120,7 +120,7 @@ document.getElementById('formEstudiante').addEventListener('submit', function(ev
     }
 
     guardarEstudiantes(estudiantes);
-    if (id) inicializarEstudiantes(); // Recargar tabla si es edición
+    if (id) inicializarEstudiantes(); 
     cerrarModal('modalEstudiante');
 });
 
