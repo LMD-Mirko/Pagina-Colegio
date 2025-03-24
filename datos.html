@@ -127,40 +127,40 @@
         </div>
     </main>
 
-    <!-- Modal agregar y editar -->
-    <div id="modalEstudiante" class="modal">
-        <div class="modal-contenido">
-            <span class="cerrar" onclick="cerrarModal('modalEstudiante')">&times;</span>
-            <h2 id="tituloModal" class="t_modal">Agregar Estudiante</h2>
-            <form id="formEstudiante">
-                <input type="hidden" id="idEstudiante" value="">
-                <div class="form-grupo">
-                    <label for="nombres">Nombres:</label>
-                    <input type="text" id="nombres" name="nombres" required>
-                </div>
-                <div class="form-grupo">
-                    <label for="correo">Correo:</label>
-                    <input type="email" id="correo" name="correo" required>
-                </div>
-                <div class="form-grupo">
-                    <label for="celular">Número de Celular:</label>
-                    <input type="tel" id="celular" name="celular" required>
-                </div>
-                <div class="form-grupo">
-                    <label for="idioma">Idioma:</label>
-                    <select id="idioma" name="idioma" required>
-                        <option value="español">Español</option>
-                        <option value="inglés">Inglés</option>
-                        <option value="francés">Francés</option>
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-modal btn-cancelar" onclick="cerrarModal('modalEstudiante')">Cancelar</button>
-                    <button type="submit" class="btn-modal btn-guardar">Guardar</button>
-                </div>
-            </form>
-        </div>
+<!-- Modal agregar y editar -->
+<div id="modalEstudiante" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal('modalEstudiante')">×</span>
+        <h2 id="tituloModal" class="t_modal">Agregar Estudiante</h2>
+        <form id="formEstudiante">
+            <input type="hidden" id="idEstudiante" value="">
+            <div class="form-grupo">
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" required>
+            </div>
+            <div class="form-grupo">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+            <div class="form-grupo">
+                <label for="celular">Número de Celular:</label>
+                <input type="tel" id="celular" name="celular" required maxlength="9" minlength="9" pattern="[0-9]{9}" title="El número debe contener exactamente 9 dígitos">
+            </div>
+            <div class="form-grupo">
+                <label for="idioma">Idioma:</label>
+                <select id="idioma" name="idioma" required>
+                    <option value="español">Español</option>
+                    <option value="inglés">Inglés</option>
+                    <option value="francés">Francés</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-modal btn-cancelar" onclick="cerrarModal('modalEstudiante')">Cancelar</button>
+                <button type="submit" class="btn-modal btn-guardar">Guardar</button>
+            </div>
+        </form>
     </div>
+</div>
 
     <!-- modal idioma -->
     <div id="modalIdioma" class="modal">
