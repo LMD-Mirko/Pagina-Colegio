@@ -154,7 +154,7 @@ body {
 }
 
 .banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.863), rgba(57, 57, 80, 0.712)), url('../img/OF18H90.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.863), rgba(57, 57, 80, 0.712)), url('../img/OF18H90.webp');
     background-size: cover;
     background-position: center;
     height: 100vh;
