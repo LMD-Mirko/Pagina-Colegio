@@ -1,41 +1,7 @@
 let estudianteIdActual = null;
+const IDIOMAS_PREDETERMINADOS = ['Español', 'Inglés', 'Francés'];
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    inicializarEstudiantes();
-    inicializarMenuResponsive();
-});
-
-function inicializarEstudiantes() {
-    const tabla = document.querySelector('.tabla-estudiantes tbody');
-    let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
-
-    const filasHTML = tabla.querySelectorAll('tr');
-    const estudiantesHTML = Array.from(filasHTML).map(fila => {
-        const celdas = fila.querySelectorAll('td');
-        return {
-            id: parseInt(celdas[0].textContent),
-            nombres: celdas[1].textContent,
-            correo: celdas[2].textContent,
-            celular: celdas[3].textContent,
-            idioma: celdas[4].textContent
-        };
-    });
-
-    if (estudiantes.length === 0 && estudiantesHTML.length > 0) {
-        estudiantes = estudiantesHTML;
-        guardarEstudiantes(estudiantes);
-    }
-
-    tabla.innerHTML = '';
-    estudiantes.forEach(est => agregarFilaEstudiante(est));
-}
-
-
-function guardarEstudiantes(estudiantes) {
-    localStorage.setItem('estudiantes', JSON.stringify(estudiantes));
-}
-
+// abrir modals
 function abrirModalAgregar() {
     document.getElementById('tituloModal').textContent = 'Agregar Estudiante';
     document.getElementById('formEstudiante').reset();
@@ -75,6 +41,15 @@ function cerrarModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
 
+// funcion de gestion de los estudi...
+function obtenerEstudiantes() {
+    return JSON.parse(localStorage.getItem('estudiantes')) || [];
+}
+
+function guardarEstudiantes(estudiantes) {
+    localStorage.setItem('estudiantes', JSON.stringify(estudiantes));
+}
+
 function agregarFilaEstudiante({ id, nombres, correo, celular, idioma }) {
     const tabla = document.querySelector('.tabla-estudiantes tbody');
     const nuevaFila = document.createElement('tr');
@@ -96,7 +71,32 @@ function agregarFilaEstudiante({ id, nombres, correo, celular, idioma }) {
     tabla.appendChild(nuevaFila);
 }
 
-document.getElementById('formEstudiante').addEventListener('submit', function(event) {
+function inicializarEstudiantes() {
+    const tabla = document.querySelector('.tabla-estudiantes tbody');
+    let estudiantes = obtenerEstudiantes();
+
+    const filasHTML = tabla.querySelectorAll('tr');
+    const estudiantesHTML = Array.from(filasHTML).map(fila => {
+        const celdas = fila.querySelectorAll('td');
+        return {
+            id: parseInt(celdas[0].textContent),
+            nombres: celdas[1].textContent,
+            correo: celdas[2].textContent,
+            celular: celdas[3].textContent,
+            idioma: celdas[4].textContent
+        };
+    });
+
+    if (estudiantes.length === 0 && estudiantesHTML.length > 0) {
+        estudiantes = estudiantesHTML;
+        guardarEstudiantes(estudiantes);
+    }
+
+    tabla.innerHTML = '';
+    estudiantes.forEach(est => agregarFilaEstudiante(est));
+}
+
+function registrarEstudiante(event) {
     event.preventDefault();
 
     const id = document.getElementById('idEstudiante').value;
@@ -105,15 +105,13 @@ document.getElementById('formEstudiante').addEventListener('submit', function(ev
     const celular = document.getElementById('celular').value;
     const idioma = document.getElementById('idioma').options[document.getElementById('idioma').selectedIndex].text;
 
-    let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+    let estudiantes = obtenerEstudiantes();
 
     if (id) {
-        // Editar estudiante existente
         estudiantes = estudiantes.map(est => 
             est.id == id ? { id: parseInt(id), nombres, correo, celular, idioma } : est
         );
     } else {
-        // Agregar nuevo estudiante
         const nuevoId = estudiantes.length > 0 ? Math.max(...estudiantes.map(e => e.id)) + 1 : 1;
         estudiantes.push({ id: nuevoId, nombres, correo, celular, idioma });
         agregarFilaEstudiante({ id: nuevoId, nombres, correo, celular, idioma });
@@ -122,27 +120,94 @@ document.getElementById('formEstudiante').addEventListener('submit', function(ev
     guardarEstudiantes(estudiantes);
     if (id) inicializarEstudiantes(); 
     cerrarModal('modalEstudiante');
-});
+}
 
-// Eliminar estudiante
-document.querySelector('.btn-confirmar')?.addEventListener('click', function() {
+function eliminarEstudiante() {
     if (estudianteIdActual) {
-        let estudiantes = JSON.parse(localStorage.getItem('estudiantes')) || [];
+        let estudiantes = obtenerEstudiantes();
         estudiantes = estudiantes.filter(est => est.id != estudianteIdActual);
         guardarEstudiantes(estudiantes);
         inicializarEstudiantes();
         cerrarModal('modalEliminar');
         estudianteIdActual = null;
     }
-});
+}
 
-// Cerrar modal al precionar fuera 
-window.addEventListener('click', function(event) {
-    const modalEstudiante = document.getElementById('modalEstudiante');
-    const modalEliminar = document.getElementById('modalEliminar');
-    const modalIdioma = document.getElementById('modalIdioma');
+// funcion para gestionar los idiomas
+function obtenerIdiomasPersonalizados() {
+    return JSON.parse(localStorage.getItem('idiomasPersonalizados')) || [];
+}
 
-    if (event.target === modalEstudiante) cerrarModal('modalEstudiante');
-    if (event.target === modalEliminar) cerrarModal('modalEliminar');
-    if (event.target === modalIdioma) cerrarModal('modalIdioma');
+function inicializarIdiomas() {
+    const selectIdioma = document.getElementById('idioma');
+    
+    selectIdioma.innerHTML = '';
+    
+    IDIOMAS_PREDETERMINADOS.forEach(idioma => {
+        const option = document.createElement('option');
+        option.value = idioma.toLowerCase();
+        option.text = idioma;
+        selectIdioma.appendChild(option);
+    });
+
+    const idiomasPersonalizados = obtenerIdiomasPersonalizados();
+    
+    idiomasPersonalizados.forEach(idioma => {
+        if (!IDIOMAS_PREDETERMINADOS.some(pred => pred.toLowerCase() === idioma.toLowerCase())) {
+            const option = document.createElement('option');
+            option.value = idioma.toLowerCase();
+            option.text = idioma;
+            selectIdioma.appendChild(option);
+        }
+    });
+}
+
+function guardarIdioma(event) {
+    event.preventDefault();
+    const nuevoIdioma = document.getElementById('nuevoIdioma').value.trim();
+    
+    if (!nuevoIdioma) {
+        alert('Por favor, ingrese un nombre de idioma válido.');
+        return;
+    }
+
+    const idiomasPersonalizados = obtenerIdiomasPersonalizados();
+    
+    const idiomaDuplicado = idiomasPersonalizados.some(
+        idioma => idioma.toLowerCase() === nuevoIdioma.toLowerCase()
+    ) || IDIOMAS_PREDETERMINADOS.some(
+        idioma => idioma.toLowerCase() === nuevoIdioma.toLowerCase()
+    );
+
+    if (idiomaDuplicado) {
+        alert('Este idioma ya existe.');
+        return;
+    }
+
+    idiomasPersonalizados.push(nuevoIdioma);
+    localStorage.setItem('idiomasPersonalizados', JSON.stringify(idiomasPersonalizados));
+    
+    inicializarIdiomas();
+    
+    document.getElementById('nuevoIdioma').value = '';
+    cerrarModal('modalIdioma');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarEstudiantes();
+    inicializarIdiomas();
+    
+    document.getElementById('formEstudiante').addEventListener('submit', registrarEstudiante);
+    document.getElementById('formIdioma').addEventListener('submit', guardarIdioma);
+    document.querySelector('.btn-confirmar').addEventListener('click', eliminarEstudiante);
+
+    window.addEventListener('click', function(event) {
+        const modalEstudiante = document.getElementById('modalEstudiante');
+        const modalEliminar = document.getElementById('modalEliminar');
+        const modalIdioma = document.getElementById('modalIdioma');
+
+        if (event.target === modalEstudiante) cerrarModal('modalEstudiante');
+        if (event.target === modalEliminar) cerrarModal('modalEliminar');
+        if (event.target === modalIdioma) cerrarModal('modalIdioma');
+    });
 });
